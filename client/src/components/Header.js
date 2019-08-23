@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./HeaderStyle.css";
 
@@ -9,23 +9,36 @@ const Header = () => {
   });
 
   const { authenticated } = redux;
-  const renderLinks = () =>
+  const activeStyle = { color: "#F15B2A" };
+  const renderNavLinks = () =>
     authenticated ? (
       <div>
-        <Link to="/signout">Sign Out</Link>
-        <Link to="/feature">Feature</Link>
+        <NavLink to="/signout" activeStyle={activeStyle}>
+          Sign Out
+        </NavLink>
+        {" | "}
+        <NavLink to="/feature" activeStyle={activeStyle}>
+          Feature
+        </NavLink>
       </div>
     ) : (
       <div>
-        <Link to="/signup">Sign Up</Link>
-        <Link to="/signin">Sign In</Link>
+        <NavLink to="/signup" activeStyle={activeStyle}>
+          Sign Up
+        </NavLink>
+        {" | "}
+        <NavLink to="/signin" activeStyle={activeStyle}>
+          Sign In
+        </NavLink>
       </div>
     );
 
   return (
     <div className="header">
-      <Link to="/">Redux Auth</Link>
-      {renderLinks()}
+      <NavLink to="/" activeStyle={activeStyle} exact>
+        Redux Auth
+      </NavLink>
+      {renderNavLinks()}
     </div>
   );
 };
