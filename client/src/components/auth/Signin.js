@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextInput from "../common/TextInput";
 import { useSelector, useDispatch } from "react-redux";
 import { signin } from "../../actions";
+import PassInput from "../common/PassInput";
+import { initialState } from "../../reducers/initialState";
 
 const Signin = ({ history }) => {
   const dispatch = useDispatch();
   const redux = useSelector(state => {
+    const creds = initialState.creds;
     return {
-      creds: state.creds,
-      errorMessage: state.auth.errorMessage
+      creds,
+      errorMessage: state.errorMessage
     };
   });
 
   const [creds, setCreds] = useState({ ...redux.creds });
+
+  useEffect(() => {
+    console.log(redux);
+  });
 
   function onSubmit(event) {
     event.preventDefault();
@@ -40,7 +47,7 @@ const Signin = ({ history }) => {
         value={creds.email}
         onChange={handleChange}
       />
-      <TextInput
+      <PassInput
         name="password"
         label="Password"
         value={creds.password}

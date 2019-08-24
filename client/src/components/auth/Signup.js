@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import TextInput from "../common/TextInput";
 import { useSelector, useDispatch } from "react-redux";
 import { signup } from "../../actions";
+import PassInput from "../common/PassInput";
 
 const Signup = ({ history }) => {
   const dispatch = useDispatch();
   const redux = useSelector(state => {
     return {
-      creds: state.creds,
+      creds: state.auth.creds,
       errorMessage: state.auth.errorMessage
     };
   });
@@ -40,7 +41,7 @@ const Signup = ({ history }) => {
         value={creds.email}
         onChange={handleChange}
       />
-      <TextInput
+      <PassInput
         name="password"
         type="password"
         label="Password"
